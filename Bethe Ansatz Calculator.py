@@ -82,7 +82,7 @@ for i in g:
 
 plt.figure(dpi=500)
 plt.xlabel('The Interacting Strength g')
-plt.ylabel('The Total Of the System E')
+plt.ylabel('The Total Energy Of the System E')
 plt.title('Bethe Ansatz')
 plt.plot(g, energies, ms=1, c='r', label= 'N=%d, L =100000'%N)
 plt.grid()
