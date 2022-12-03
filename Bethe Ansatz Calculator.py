@@ -13,7 +13,9 @@ import matplotlib.pyplot as plt
 #Number of particles
 N = 20
 #Size of the box
-L = 100000
+L = 40
+# density
+dens= N/L
 
 
 #the integers/quantum numbers
@@ -55,7 +57,7 @@ def BAeqs(x):
     return arr
 
 #initial trial
-init = np.zeros(N)
+init = 2*np.pi*Is(N)
 #the solved k's
 #k = optimize.newton_krylov(BAeqs, init, iter=40)
 #print(k)
@@ -64,6 +66,10 @@ init = np.zeros(N)
 def energy(p):
     return 0.5*np.sum(np.square(p))
 
+#Total energy
+def momentum(p):
+    return np.sum(p)
+
 #The strength
 #c = np.linspace(-2, 2, 10)
 #c = 1
@@ -71,14 +77,17 @@ def energy(p):
 
 
 #The interacting strength
-g=np.linspace(0, 10, 50)
+g=np.linspace(0, 4, 10)
 energies = []
 #λs = np.linspace(-1/4, 1/4, 50)
 for i in g:
     λ= 0.5*(1 + np.sqrt(1 + 4*i))
     k = optimize.newton_krylov(BAeqs, init, iter=100)
     enr = energy(k)
+    mom = momentum(k)
     energies.append(enr)
+    print(λ,mom/L,enr/L)
+    print(k)
 
 plt.figure(dpi=500)
 plt.xlabel('The Interacting Strength g')
